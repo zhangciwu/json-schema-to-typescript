@@ -2,6 +2,7 @@ import {whiteBright} from 'cli-color'
 import {deburr, isPlainObject, mapValues, trim, upperFirst} from 'lodash'
 import {basename, extname, join} from 'path'
 import {JSONSchema} from './types/JSONSchema'
+import {Options} from './index'
 
 // TODO: pull out into a separate package
 export function Try<T>(fn: () => T, err: (e: Error) => any): T {
@@ -158,10 +159,11 @@ export function stripExtension(filename: string): string {
  * Convert a string that might contain spaces or special characters to one that
  * can safely be used as a TypeScript interface or enum name.
  */
-export function toSafeString(string: string) {
+export function toSafeString(string: string, options: Options) {
   // identifiers in javaScript/ts:
   // First character: a-zA-Z | _ | $
   // Rest: a-zA-Z | _ | $ | 0-9
+
 
   return upperFirst(
     // remove accents, umlauts, ... by their basic latin letters

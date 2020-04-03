@@ -54,6 +54,16 @@ export interface Options {
    * [$RefParser](https://github.com/BigstickCarpet/json-schema-ref-parser) Options, used when resolving `$ref`s
    */
   $refOptions: $RefOptions
+
+  /**
+   * remove accents, umlauts, ... by their basic latin letters
+   */
+  deburr: boolean
+
+  /**
+   * preserve non-latin unicode characters
+   */
+  preserveUnicode: boolean
 }
 
 export const DEFAULT_OPTIONS: Options = {
@@ -78,7 +88,9 @@ export const DEFAULT_OPTIONS: Options = {
     trailingComma: 'none',
     useTabs: false
   },
-  unreachableDefinitions: false
+  unreachableDefinitions: false,
+  deburr: true,
+  preserveUnicode: true
 }
 
 export function compileFromFile(filename: string, options: Partial<Options> = DEFAULT_OPTIONS): Promise<string> {
